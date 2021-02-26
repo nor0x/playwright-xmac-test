@@ -19,13 +19,21 @@ namespace PlaywrightTestXFMac.macOS
             }
             if(_browser == null)
             {
-                _browser = browserType switch
+                switch(browserType)
                 {
-                    "firefox" => await _pw.Firefox.LaunchAsync(headless: true),
-                    "webkit" => await _pw.Webkit.LaunchAsync(headless: true),
-                    "chromium" => await _pw.Chromium.LaunchAsync(headless: true),
-                    _ => null
-                };
+                    case "firefox":
+                       _browser = await _pw.Firefox.LaunchAsync(headless: true);
+                    break;
+                    case "webkit":
+                        _browser = await _pw.Webkit.LaunchAsync(headless: true);
+                        break;
+                    case "chromium":
+                        _browser = await _pw.Webkit.LaunchAsync(headless: true);
+                        break;
+                    default:
+                        _browser = null;
+                        break;
+                }
             }
             if(_page == null)
             {
